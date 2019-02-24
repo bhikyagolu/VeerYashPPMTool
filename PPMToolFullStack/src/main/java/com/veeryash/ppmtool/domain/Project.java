@@ -38,6 +38,7 @@ public class Project {
     private Date endDate;
 
     @JsonFormat(pattern = "dd-mm-yyyy")
+    @Column(updatable = false)
     private Date created_At;
 
     @JsonFormat(pattern = "dd-mm-yyyy")
@@ -111,7 +112,7 @@ public class Project {
     }
 
     @PrePersist
-    protected void onCreate(){
+    protected void onCreate() {
         this.created_At = new Date();
     }
 
