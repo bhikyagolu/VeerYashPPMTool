@@ -1,12 +1,16 @@
 package com.veeryash.ppmtool.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
@@ -43,6 +47,11 @@ public class Project {
 
     @JsonFormat(pattern = "dd-mm-yyyy")
     private Date updated_At;
+
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+    @JsonIgnore
+    private Backlog Backlog;
 
     public Project() {
     }
@@ -109,6 +118,14 @@ public class Project {
 
     public void setUpdated_At(Date updated_At) {
         this.updated_At = updated_At;
+    }
+
+    public Backlog getBacklog() {
+        return Backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        Backlog = backlog;
     }
 
     @PrePersist
