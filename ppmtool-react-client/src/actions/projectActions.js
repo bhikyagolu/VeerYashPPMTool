@@ -4,7 +4,7 @@ import { GET_ERRORS, GET_PROJECTS, GET_PROJECT, DELETE_PROJECT } from "./types";
 
 export const createProject = (project, history) => async dispatch => {
   try {
-    const res = await axios.post("/api/project", project);
+    await axios.post("/api/project", project);
     history.push("/dashboard");
     dispatch({
       type: GET_ERRORS,
@@ -43,7 +43,7 @@ export const getProject = (projectId, history) => async dispatch => {
 
 export const deleteProject = projectId => async dispatch => {
   console.log(" deleting the project ! " + projectId);
-  const res = await axios.delete(`/api/project/${projectId}`);
+  await axios.delete(`/api/project/${projectId}`);
   dispatch({
     type: DELETE_PROJECT,
     payload: projectId

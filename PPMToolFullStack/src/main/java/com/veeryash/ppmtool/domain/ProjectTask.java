@@ -3,7 +3,6 @@ package com.veeryash.ppmtool.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,7 +27,7 @@ public class ProjectTask {
 
     @NotBlank(message = "Please include a project summary")
     private String summary;
-    private String acceptance;
+    private String acceptanceCriteria;
     private String status;
     private Integer priority;
     @JsonFormat(pattern = "dd-mm-yyyy")
@@ -76,12 +75,12 @@ public class ProjectTask {
         this.summary = summary;
     }
 
-    public String getAcceptance() {
-        return acceptance;
+    public String getAcceptanceCriteria() {
+        return acceptanceCriteria;
     }
 
-    public void setAcceptance(String acceptance) {
-        this.acceptance = acceptance;
+    public void setAcceptanceCriteria(String acceptanceCriteria) {
+        this.acceptanceCriteria = acceptanceCriteria;
     }
 
     public String getStatus() {
@@ -156,7 +155,7 @@ public class ProjectTask {
                 "id=" + id +
                 ", projectSequence='" + projectSequence + '\'' +
                 ", summary='" + summary + '\'' +
-                ", acceptance='" + acceptance + '\'' +
+                ", acceptanceCriteria='" + acceptanceCriteria + '\'' +
                 ", status='" + status + '\'' +
                 ", priority=" + priority +
                 ", dueDate=" + dueDate +
