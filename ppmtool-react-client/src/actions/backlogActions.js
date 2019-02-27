@@ -69,8 +69,6 @@ export const updateProjectTask = (
   history
 ) => async dispatch => {
   try {
-    console.log("----------------");
-    console.log(project_task);
     await axios.patch(`/api/backlog/${backlog_id}/${pt_id}`, project_task);
     history.push(`/projectBoard/${backlog_id}`);
     dispatch({

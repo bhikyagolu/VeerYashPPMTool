@@ -55,7 +55,7 @@ public class BacklogController {
     }
 
     @PatchMapping("/{backlogId}/{psId}")
-    public ResponseEntity<?> updateProjectTask(@Valid ProjectTask updateProjectTask, BindingResult result, @PathVariable String backlogId, @PathVariable String psId) {
+    public ResponseEntity<?> updateProjectTask(@Valid @RequestBody ProjectTask updateProjectTask, BindingResult result, @PathVariable String backlogId, @PathVariable String psId) {
 
         ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
         if (errorMap != null) {
