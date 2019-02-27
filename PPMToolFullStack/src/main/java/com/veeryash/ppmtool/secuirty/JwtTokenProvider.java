@@ -1,8 +1,13 @@
 package com.veeryash.ppmtool.secuirty;
 
 import com.veeryash.ppmtool.domain.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +42,30 @@ public class JwtTokenProvider {
                 .compact();
     }
     // validate the token
-    // get userid from token
 
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
+            return true;
+        } catch (SignatureException ex) {
+            System.out.println("Invalid Jwt Signature");
+        } catch (MalformedJwtException ex) {
+            System.out.println("Invalid Jwt Token");
+        } catch (ExpiredJwtException ex) {
+            System.out.println("Invalid Jwt Token");
+        } catch (UnsupportedJwtException ex) {
+            System.out.println("Unsupported Jwt Token");
+        } catch (IllegalArgumentException ex) {
+            System.out.println("JWt claims string is empty");
+        }
+        return false;
+    }
+
+    // get userid from token
+    public Long getUserIdFromJWT(String token) {
+        Claims claims = Jwts.parser().setSigningKey(SECRET)
+                .parseClaimsJws(token).getBody();
+        Long id = Long.parseLong((String)claims.get("id"));
+        return id;
+    }
 }
