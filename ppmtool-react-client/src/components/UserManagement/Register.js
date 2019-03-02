@@ -23,6 +23,7 @@ class Register extends Component {
   }
 
   onSubmit(e) {
+    console.log("in register submit");
     e.preventDefault();
     const newUser = {
       username: this.state.username,
@@ -64,7 +65,6 @@ class Register extends Component {
                     })}
                     placeholder="Full Name"
                     name="fullName"
-                    required
                     value={this.state.fullName}
                     onChange={this.onChange}
                   />
